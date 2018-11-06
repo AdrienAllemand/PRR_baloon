@@ -5,23 +5,19 @@ import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 public class BalloonJPanel extends JPanel  {
-    private Balloon balloon;
-     
-    public BalloonJPanel(Balloon balloon) {
-    	this.balloon = balloon;
+
+	BalloonPlayer player;
+
+    public BalloonJPanel(BalloonPlayer player) {
+    	this.player = player;
         setPreferredSize(new Dimension(200,200));
     }
     
     public void paintComponent (Graphics g) {
     	super.paintComponent(g);
-		if (balloon != null) {
-    	int rayon = balloon.getRayon();
+		if (player.balloon != null) {
+    	int rayon = player.balloon.getRayon();
         g.drawOval(getWidth()/2-rayon, getHeight()/2-rayon, 2*rayon, 2*rayon);
 		}
     }
-
-	public void resetBalloon() {
-    	balloon = null;
-    	repaint();
-	}
 }

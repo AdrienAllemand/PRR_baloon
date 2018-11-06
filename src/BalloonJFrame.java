@@ -16,17 +16,23 @@ import javax.swing.JPanel;
 public class BalloonJFrame extends JFrame {
 	private JButton little, large, lance;
 	private BalloonJPanel balloonJPanel;
-	private Balloon balloon;
+	private BalloonPlayer player;
 
 	public static void main (String args[]) {
-		new BalloonJFrame();
+
+		BalloonJFrame p1 = new BalloonJFrame("Adri");
+		BalloonJFrame p2 = new BalloonJFrame("Loyse");
+		Balloon balloon = new Balloon(5);
+
 	}
 
-	public BalloonJFrame() {
-        setTitle("Balloon");
-        balloon = new Balloon(20);
+	public BalloonJFrame(String name) {
+        setTitle(name);
+
+        player = new BalloonPlayer(name);
+
 		Container contentPane = getContentPane();		
-		balloonJPanel = new BalloonJPanel(balloon);
+		balloonJPanel = new BalloonJPanel(player);
 		contentPane.add(balloonJPanel,BorderLayout.CENTER);
 		
 		JPanel boutons = new JPanel();
@@ -37,7 +43,7 @@ public class BalloonJFrame extends JFrame {
 		boutons.add(little);
 		little.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (balloon != null) balloon.changeSize(-5);
+				player.ScaleBalloonDown();
 				balloonJPanel.repaint();
 			}
 		});		
@@ -47,7 +53,7 @@ public class BalloonJFrame extends JFrame {
 		lance.addActionListener(new ActionListener(){	
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				balloonJPanel.resetBalloon();
+
 			}
 		});
 		
@@ -55,7 +61,7 @@ public class BalloonJFrame extends JFrame {
 		boutons.add(large);
 		large.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (balloon != null) balloon.changeSize(+5);
+				player.ScaleBalloonUp();
 				balloonJPanel.repaint();
 			}			
 		});
